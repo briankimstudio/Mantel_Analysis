@@ -10,24 +10,37 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 
 ```
 
-## Purpose
+#### Purpose
 
 Identify relationship between spacial data and measurement data
 
-## Packages
+#### Required Packages
+
 ```{r}
 library(ade4)
 ```
 
 
-## Input data
-```{r cars}
+#### Input data
+
+Load data from online directly.
+```{r}
 ozone <- read.table("https://stats.idre.ucla.edu/stat/r/faq/ozone.csv", sep=",", header=T)
+```
+
+Inspect data structure to determine appropriate pre-processing method. It shows there are 32 rows and 4 columns(Station, Av8top, Lat, Lon). Among columns, Lat and Lon is location data and Av8top is measurement data.
+```{r}
+str(ozone)
+```
+
+Show first 10 rows for quick check.
+```{r}
 head(ozone, n=10)
 ```
 
-## Pre-processing
-At first, calculate the distance between pair using dist function.
+#### Pre-processing
+
+At first, calculate the distance between pair using **dist** function.
 
 ```{r}
 # Calculate distance matrix for locations
@@ -37,7 +50,7 @@ station.dists <- dist(cbind(ozone$Lon, ozone$Lat))
 ozone.dists <- dist(ozone$Av8top)
 ```
 
-Then, display data in matrix format to verify. (only first 5 rows and colums)
+Then, display data in matrix format to verify. (only first 5 rows and columns)
 
 ```{r}
 # Print matrix
@@ -45,19 +58,42 @@ as.matrix(station.dists)[1:5, 1:5]
 as.matrix(ozone.dists)[1:5, 1:5]
 ```
 
-## Analysis
 
-Run the analysis by repeating 9999 times.
+Visualize matrices. 
+
+```{r, echo = FALSE, fig.align = 'center'}
+source("Custom_Heatmap.R", local = knitr::knit_global())
+p1<-custom_heatmap(as.matrix(station.dists),"Station")
+p2<-custom_heatmap(as.matrix(ozone.dists),"Ozone")
+grid.arrange(p1, p2, ncol = 2)   
+
+```
+
+#### Analysis
+
+Run the Mantel test with 9999 repetitions.
 
 ```{r}
 results <- mantel.rtest(station.dists, ozone.dists, nrepet = 9999)
 ```
 
-## Ouput
+#### Ouput
+
 ```{r}
 show(results)
 ```
 
-From the results, the correlation is `r results$obs` and p value is `r results$pvalue`.
+From the results, the correlation is `r results$obs` and p value is `r results$pvalue`(less than 0.05). Thus, null hypothesis is rejected and research hypothesis is taken.
+
+#### Conclusion
 
 The p value of `r results$pvalue` indicates that the relationship between spacial data and measurement data is statistically significant. Therefore, we can conclude that the location and ozone value are related each other.
+
+#### Source code
+
+```{r, eval = FALSE, code=xfun::read_utf8('Tutorial_Mantel_test.R')}
+```
+
+#### References
+
+HOW CAN I PERFORM A MANTEL TEST IN R? | R FAQ
