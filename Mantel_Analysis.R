@@ -20,10 +20,10 @@ as.matrix(station.dists)[1:5, 1:5]
 as.matrix(ozone.dists)[1:5, 1:5]
 
 # Run Mantel test
-mantel.rtest(station.dists, ozone.dists, nrepet = 9999)
+results <- mantel.rtest(station.dists, ozone.dists, nrepet = 9999)
 mantel(station.dists, ozone.dists, permutations = 9999)
 plot()
-
+show(results)
 
 #Vegan package
 library(vegan)

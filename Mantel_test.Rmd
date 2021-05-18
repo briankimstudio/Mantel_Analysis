@@ -1,0 +1,63 @@
+---
+title: "Tutorial on Mantel test in R"
+author: "Brian"
+date: "5/18/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+
+```
+
+## Purpose
+
+Identify relationship between spacial data and measurement data
+
+## Packages
+```{r}
+library(ade4)
+```
+
+
+## Input data
+```{r cars}
+ozone <- read.table("https://stats.idre.ucla.edu/stat/r/faq/ozone.csv", sep=",", header=T)
+head(ozone, n=10)
+```
+
+## Pre-processing
+At first, calculate the distance between pair using dist function.
+
+```{r}
+# Calculate distance matrix for locations
+station.dists <- dist(cbind(ozone$Lon, ozone$Lat)) 
+
+# Calculate distance matrix for measurements
+ozone.dists <- dist(ozone$Av8top)
+```
+
+Then, display data in matrix format to verify. (only first 5 rows and colums)
+
+```{r}
+# Print matrix
+as.matrix(station.dists)[1:5, 1:5]
+as.matrix(ozone.dists)[1:5, 1:5]
+```
+
+## Analysis
+
+Run the analysis by repeating 9999 times.
+
+```{r}
+results <- mantel.rtest(station.dists, ozone.dists, nrepet = 9999)
+```
+
+## Ouput
+```{r}
+show(results)
+```
+
+From the results, the correlation is `r results$obs` and p value is `r results$pvalue`.
+
+The p value of `r results$pvalue` indicates that the relationship between spacial data and measurement data is statistically significant. Therefore, we can conclude that the location and ozone value are related each other.
