@@ -197,11 +197,11 @@ summary {
 
 <div id="purpose" class="section level4">
 <h4>Purpose</h4>
-<p>Identify relationship between matrices. For example, it statistically tests whether spacial data are related to measurement data or not.</p>
+<p>Identify the relationship between matrices. For example, it statistically tests whether spatial data are related to measurement data or not.</p>
 </div>
 <div id="required-packages" class="section level4">
 <h4>Required Packages</h4>
-<p>For conducting Mantel test in R, we need to use a package such as <strong>ade4</strong> or <strong>vegan</strong>. Currently, while <strong>vegan</strong> supports both simple and partial Mantel test, <strong>ade4</strong> supports simple Mantel test only.</p>
+<p>For conducting the Mantel test in R, we need to use a package such as <strong>ade4</strong> or <strong>vegan</strong>. Currently, while <strong>vegan</strong> supports both simple and partial Mantel test, <strong>ade4</strong> supports simple Mantel test only.</p>
 <p>Fortunately, regardless of what package you are using, the process is almost identical. The difference is only the name of function.</p>
 <ul>
 <li>vegan : mantel (simple), mantel.partial (partial)</li>
@@ -367,14 +367,14 @@ show(results)</code></pre>
 ## mantel(xdis = station.dists, ydis = ozone.dists, permutations = 9999) 
 ## 
 ## Mantel statistic r: 0.1636 
-##       Significance: 0.0292 
+##       Significance: 0.0286 
 ## 
 ## Upper quantiles of permutations (null model):
-##    90%    95%  97.5%    99% 
-## 0.0994 0.1357 0.1716 0.2055 
+##   90%   95% 97.5%   99% 
+## 0.097 0.134 0.170 0.208 
 ## Permutation: free
 ## Number of permutations: 9999</code></pre>
-<p>From the results of simple Mantel test, the r is 0.1636308 and p value is 0.0292(less than 0.05). Thus, null hypothesis is rejected and research hypothesis is taken.</p>
+<p>From the results of the simple Mantel test, the r is 0.1636308, and the p-value is 0.0286(less than 0.05). Thus, the null hypothesis is rejected and the research hypothesis is taken.</p>
 <pre class="r"><code># Results of partial Mantel test
 show(results_partial)</code></pre>
 <pre><code>## 
@@ -383,19 +383,19 @@ show(results_partial)</code></pre>
 ## Call:
 ## mantel.partial(xdis = station.dists, ydis = ozone.dists, zdis = c.dists,      permutations = 9999) 
 ## 
-## Mantel statistic r: 0.1639 
-##       Significance: 0.0332 
+## Mantel statistic r: 0.1629 
+##       Significance: 0.0292 
 ## 
 ## Upper quantiles of permutations (null model):
 ##   90%   95% 97.5%   99% 
-## 0.104 0.142 0.175 0.213 
+## 0.101 0.139 0.169 0.205 
 ## Permutation: free
 ## Number of permutations: 9999</code></pre>
-<p>From the results of partial Mantel test, the r is 0.1638729 and p value is 0.0332(less than 0.05). Thus, null hypothesis is rejected and research hypothesis is taken.</p>
+<p>From the results of the partial Mantel test, the r is 0.162855, and the p-value is 0.0292(less than 0.05). Thus, the null hypothesis is rejected and the research hypothesis is taken.</p>
 </div>
 <div id="conclusion" class="section level4">
 <h4>Conclusion</h4>
-<p>The p value of indicates that the relationship between spacial data and measurement data is statistically significant. Therefore, we can conclude that the location and ozone value are related each other.</p>
+<p>The p-value of 0.0292 indicates that the relationship between spatial data and measurement data is statistically significant. Therefore, we can conclude that the location and ozone value are related to each other.</p>
 </div>
 <div id="using-ade4-package" class="section level4">
 <h4>Using <strong>ade4</strong> package</h4>
@@ -475,11 +475,11 @@ show(results)</code></pre>
 ## Observation: 0.1636308 
 ## 
 ## Based on 9999 replicates
-## Simulated p-value: 0.0285 
+## Simulated p-value: 0.0297 
 ## Alternative hypothesis: greater 
 ## 
 ##      Std.Obs  Expectation     Variance 
-## 2.2495158752 0.0002425692 0.0052754971</code></pre>
+## 2.2099360409 0.0006243055 0.0054406448</code></pre>
 </div>
 <div id="source-code" class="section level4">
 <h4>Source code</h4>

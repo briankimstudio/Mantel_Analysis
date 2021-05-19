@@ -13,11 +13,11 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 
 #### Purpose
 
-Identify relationship between matrices. For example, it statistically tests whether spacial data are related to  measurement data or not.
+Identify the relationship between matrices. For example, it statistically tests whether spatial data are related to  measurement data or not.
 
 #### Required Packages
 
-For conducting Mantel test in R, we need to use a package such as **ade4** or **vegan**. Currently, while **vegan** supports both simple and partial Mantel test, **ade4** supports simple Mantel test only.
+For conducting the Mantel test in R, we need to use a package such as **ade4** or **vegan**. Currently, while **vegan** supports both simple and partial Mantel test, **ade4** supports simple Mantel test only.
 
 Fortunately, regardless of what package you are using, the process is almost identical. The difference is only the name of function.
 
@@ -120,18 +120,18 @@ results_partial <- mantel.partial(station.dists, ozone.dists, c.dists, permutati
 show(results)
 ```
 
-From the results of simple Mantel test, the r is `r results$statistic` and p value is `r results$signif`(less than 0.05). Thus, null hypothesis is rejected and research hypothesis is taken.
+From the results of the simple Mantel test, the r is `r results$statistic`, and the p-value is `r results$signif`(less than 0.05). Thus, the null hypothesis is rejected and the research hypothesis is taken.
 
 ```{r}
 # Results of partial Mantel test
 show(results_partial)
 ```
 
-From the results of partial Mantel test, the r is `r results_partial$statistic` and p value is `r results_partial$signif`(less than 0.05). Thus, null hypothesis is rejected and research hypothesis is taken.
+From the results of the partial Mantel test, the r is `r results_partial$statistic`, and the p-value is `r results_partial$signif`(less than 0.05). Thus, the null hypothesis is rejected and the research hypothesis is taken.
 
 #### Conclusion
 
-The p value of `r results$pvalue` indicates that the relationship between spacial data and measurement data is statistically significant. Therefore, we can conclude that the location and ozone value are related each other.
+The p-value of `r results_partial$signif` indicates that the relationship between spatial data and measurement data is statistically significant. Therefore, we can conclude that the location and ozone value are related to each other.
 
 #### Using **ade4** package 
 
