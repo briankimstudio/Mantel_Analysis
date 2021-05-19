@@ -92,15 +92,13 @@ as.matrix(station.dists)[1:5, 1:5]
 as.matrix(ozone.dists)[1:5, 1:5]
 ```
 
-
-Visualize matrices. 
+Visualize matrices. In order to visually compare the similarity, matrices are converted to correlation matrix before drawing plot.
 
 ```{r, echo = FALSE, fig.align = 'center'}
 source("Custom_Heatmap.R", local = knitr::knit_global())
 p1<-custom_heatmap(as.matrix(station.dists),"Station")
 p2<-custom_heatmap(as.matrix(ozone.dists),"Ozone")
 grid.arrange(p1, p2, ncol = 2)   
-
 ```
 
 #### Step 4. Analysis
